@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "40366420847",
+    "project_id": "draintech-59e01",
+    "storage_bucket": "draintech-59e01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40366420847:android:c51e9a7c02031c4749ae9a",
+        "android_client_info": {
+          "package_name": "com.draintech.draintech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40366420847-i2k7s458ffm9ogom1j5jtfq7r4svt626.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.draintech.draintech",
+            "certificate_hash": "61e082c7fd762845c7ae39404dfc95d2477fdede"
+          }
+        },
+        {
+          "client_id": "40366420847-nhkk2uu1n21n6lnp920a39ps6ao4hlab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdidooo9h8U7NRDoGSD0rmZU81hW4-NmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40366420847-nhkk2uu1n21n6lnp920a39ps6ao4hlab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
