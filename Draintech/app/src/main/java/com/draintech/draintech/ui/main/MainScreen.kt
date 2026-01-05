@@ -115,7 +115,6 @@ fun MainScreen() {
             }
         }
     ) { padding ->
-        // CORRECCIÓN: Se cambia a una Columna para poder poner el logo arriba
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -123,7 +122,6 @@ fun MainScreen() {
                 .background(Color(0xFF0D1B2A)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Se añade la imagen del logo
             Image(
                 painter = painterResource(id = R.drawable.logo_draintech),
                 contentDescription = "Logo de Draintech",
@@ -133,7 +131,6 @@ fun MainScreen() {
             )
 
             if (devices.isEmpty()) {
-                // Se usa un Box para centrar el texto en el espacio restante
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
