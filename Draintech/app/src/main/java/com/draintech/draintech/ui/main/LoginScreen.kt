@@ -35,10 +35,7 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    // --- INICIO: CÓDIGO DE PERMISO DE NOTIFICACIÓN ---
-    // Este es el lugar correcto para poner esta lógica
 
-    // 1. Preparamos el lanzador que pedirá el permiso
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -49,22 +46,17 @@ fun LoginScreen(
         }
     }
 
-    // 2. Lo ejecutamos una vez que la pantalla se compone
+
     LaunchedEffect(Unit) {
-        // Solo aplica para Android 13 (API 33) y superiores
+    
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
-                // 3. Revisamos si ya tenemos el permiso
                 ContextCompat.checkSelfPermission(
                     context,
                     Manifest.permission.POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED -> {
                     Log.d("PERMISO", "El permiso de notificación ya estaba concedido.")
                 }
-                // 4. (Opcional) Aquí podrías mostrar un diálogo explicando por qué
-                // !shouldShowRequestPermissionRationale(...) -> { ... }
-
-                // 5. Si no lo tenemos, lo pedimos
                 else -> {
                     Log.d("PERMISO", "Pidiendo permiso de notificación...")
                     permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -72,7 +64,6 @@ fun LoginScreen(
             }
         }
     }
-    // --- FIN: CÓDIGO DE PERMISO DE NOTIFICACIÓN ---
 
 
     val imageLoader = ImageLoader.Builder(context)
@@ -101,14 +92,12 @@ fun LoginScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // --- CAMBIO AQUÍ ---
-            // Se reemplaza el Text por el logo desde los recursos drawable.
+
             Image(
                 painter = painterResource(id = R.drawable.logo_draintech),
                 contentDescription = "Logo de Draintech",
                 modifier = Modifier.height(80.dp) // Ajusta la altura del logo como prefieras
             )
-            // --- FIN DEL CAMBIO ---
 
             Spacer(modifier = Modifier.height(24.dp))
             OutlinedTextField(
