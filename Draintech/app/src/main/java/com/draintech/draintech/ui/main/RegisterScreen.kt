@@ -56,11 +56,10 @@ fun RegisterScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Se reemplaza el Text por el logo desde los recursos drawable.
             Image(
                 painter = painterResource(id = R.drawable.logo_draintech),
                 contentDescription = "Logo de Draintech",
-                modifier = Modifier.height(80.dp) // Ajusta la altura del logo como prefieras
+                modifier = Modifier.height(80.dp)
             )
 
             Spacer(modifier = Modifier.height(24.dp))
