@@ -82,16 +82,10 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
     val refHistorial = FirebaseDatabase.getInstance().getReference("historial/$mac")
     val refControl = FirebaseDatabase.getInstance().getReference("control/$mac")
 
-    // -----------------------------------------------------------------------
-    //  NUEVA FUNCIÓN PRINCIPAL: Actualiza Control y Guarda en Historial
-    // -----------------------------------------------------------------------
     fun cambiarEstadoRegistro(abierto: Boolean) {
-        // 1. Actualizar CONTROL (Esto manda la orden al ESP32)
+
         refControl.child("registroAbierto").setValue(abierto)
 
-        // 2. Guardar en HISTORIAL
-        // Necesitamos guardar TAMBIÉN el estado actual de los otros sensores
-        // para que las gráficas no se rompan (evitar que bajen a 0).
         val timestampSeconds = System.currentTimeMillis() / 1000.0 // Python usa segundos (float)
 
         val nuevoRegistro = mapOf(
@@ -109,7 +103,6 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
         }
     }
 
-    // --- FUNCIÓN FETCH HISTORIAL (Para leer datos de Gráficas) ---
     fun fetchHistory(sensorKey: String, sensorTitle: String) {
         isBooleanSensor = (sensorKey == "lluvia" || sensorKey == "obstruccion" ||
                 sensorKey == "tapaAbierta" || sensorKey == "registroAbierto")
@@ -269,7 +262,6 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
         }
     }
 
-    // --- DIÁLOGOS (Aquí usamos la función corregida) ---
 
     if (showHistoryDialog) {
         HistoryDialog(sensorName = selectedSensorName, dataPoints = historyData, isBoolean = isBooleanSensor, onDismiss = { showHistoryDialog = false })
@@ -283,7 +275,7 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
             text = { Text("La canastilla está casi llena. ¿Abrir registro?") },
             confirmButton = {
                 Button(onClick = {
-                    cambiarEstadoRegistro(true) // <--- CORREGIDO: Guarda en Historial y Control
+                    cambiarEstadoRegistro(true)
                     showAlert = false
                 }) { Text("Sí") }
             },
@@ -300,7 +292,7 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
             confirmButton = {
                 Button(
                     onClick = {
-                        cambiarEstadoRegistro(false) // <--- CORREGIDO
+                        cambiarEstadoRegistro(false)
                         showCloseRegisterDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD32F2F))
@@ -319,7 +311,7 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
             confirmButton = {
                 Button(
                     onClick = {
-                        cambiarEstadoRegistro(true) // <--- CORREGIDO
+                        cambiarEstadoRegistro(true)
                         showOpenRegisterDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD32F2F))
@@ -330,7 +322,6 @@ fun DeviceDetailScreen(mac: String, nombre: String) {
     }
 }
 
-// --- COMPONENTES UI (Iguales que antes) ---
 
 @Composable
 fun RegisterStatusCard(title: String, buttonText: String, buttonColor: Color, onButtonClick: () -> Unit) {
